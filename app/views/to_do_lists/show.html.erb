@@ -1,0 +1,6 @@
+<h2><%= @to_do_list.title %></h2>
+<p><%= @to_do_list.description %></p>
+
+<%= link_to "Back", root_path %>
+<%= link_to "Edit", edit_to_do_list_path(@to_do_list) %>
+<%= link_to "Delete", to_do_list_path(@to_do_list), method: :delete, data: {condirm: "Are you sure?"} %>

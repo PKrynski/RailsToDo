@@ -1,1 +1,4 @@
-<h1>Index</h1>
+<% @all_lists.each do |to_do_list| %>
+    <h2><%= link_to to_do_list.title, to_do_list %></h2>
+    <p><%= to_do_list.description %></p>
+<% end %>
