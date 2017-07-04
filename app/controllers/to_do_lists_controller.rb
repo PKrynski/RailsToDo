@@ -7,6 +7,7 @@ class ToDoListsController < ApplicationController
   end
 
   def show
+    @items = @to_do_list.items.all
   end
 
   def new

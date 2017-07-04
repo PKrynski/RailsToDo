@@ -4,3 +4,7 @@
 <%= link_to "Back", root_path %>
 <%= link_to "Edit", edit_to_do_list_path(@to_do_list) %>
 <%= link_to "Delete", to_do_list_path(@to_do_list), method: :delete, data: {condirm: "Are you sure?"} %>
+
+<% @items.each do |item| %>
+    <p><%= item.content %></p>
+<% end %>
