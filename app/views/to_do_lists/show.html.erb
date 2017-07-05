@@ -1,15 +1,57 @@
-<h2><%= @to_do_list.title %></h2>
+<h1><%= @to_do_list.title %></h1>
 <p><%= @to_do_list.description %></p>
 
-<%= link_to "Back", root_path %>
-<%= link_to "Edit", edit_to_do_list_path(@to_do_list) %>
-<%= link_to "Delete", to_do_list_path(@to_do_list), method: :delete,
-            data: {confirm: "Are you sure you want to delete this list?"} %>
+<p><%= link_to "Back", root_path %></p>
+<p><%= link_to "Edit", edit_to_do_list_path(@to_do_list) %></p>
+<p><%= link_to "Delete", to_do_list_path(@to_do_list), method: :delete,
+               data: {confirm: "Are you sure you want to delete this list?"} %></p>
 
 <% @items.each do |item| %>
-    <p><%= item.content %></p>
-    <%= link_to "Delete", to_do_list_item_path(@to_do_list, item), method: :delete,
-                data: {confirm: "Are you sure you want to delete this item?"} %>
+
+    <% if item.completed? %>
+
+        <div class="row">
+
+          <div class="col-md-11">
+            <h3 style="opacity: 0.5"><s><%= item.content %></s></h3>
+            <p style="opacity: 0.5">Completed <%= time_ago_in_words(item.completed_at) %> ago</p>
+          </div>
+
+          <div class="col-md-1">
+            <p><%= link_to to_do_list_item_path(@to_do_list, item), method: :delete,
+                           data: {confirm: "Are you sure you want to delete this item?"} do %></p>
+                  <i class="fa fa-2x fa-trash"></i>
+              <% end %>
+              </div>
+
+        </div>
+
+    <% else %>
+
+        <div class="row">
+
+          <div class="col-md-10">
+            <h3><%= item.content %></h3>
+            <p>Created <%= time_ago_in_words(item.created_at) %> ago</p>
+          </div>
+
+          <div class="col-md-1">
+            <p><%= link_to complete_to_do_list_item_path(@to_do_list, item), method: :patch do %></p>
+                  <i class="fa fa-2x fa-check"></i>
+              <% end %>
+              </div>
+
+          <div class="col-md-1">
+            <p><%= link_to to_do_list_item_path(@to_do_list, item), method: :delete,
+                           data: {confirm: "Are you sure you want to delete this item?"} do %></p>
+                  <i class="fa fa-2x fa-trash"></i>
+              <% end %>
+              </div>
+
+        </div>
+
+    <% end %>
+
 <% end %>
 
 <h3>Add new item</h3>

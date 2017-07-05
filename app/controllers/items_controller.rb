@@ -25,6 +25,12 @@ class ItemsController < ApplicationController
     redirect_to to_do_list_path(@to_do_list)
   end
 
+  def complete
+    @item = @to_do_list.items.find(params[:id])
+    @item.update_attribute(:completed_at, Time.now)
+    redirect_to to_do_list_path(@to_do_list)
+  end
+
   private
 
   def find_list
