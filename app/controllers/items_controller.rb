@@ -19,7 +19,10 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
+  def destroy
+    @item = @to_do_list.items.find(params[:id])
+    @item.destroy
+    redirect_to to_do_list_path(@to_do_list)
   end
 
   private

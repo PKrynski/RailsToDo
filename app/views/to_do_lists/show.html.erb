@@ -3,10 +3,13 @@
 
 <%= link_to "Back", root_path %>
 <%= link_to "Edit", edit_to_do_list_path(@to_do_list) %>
-<%= link_to "Delete", to_do_list_path(@to_do_list), method: :delete, data: {condirm: "Are you sure?"} %>
+<%= link_to "Delete", to_do_list_path(@to_do_list), method: :delete,
+            data: {confirm: "Are you sure you want to delete this list?"} %>
 
 <% @items.each do |item| %>
     <p><%= item.content %></p>
+    <%= link_to "Delete", to_do_list_item_path(@to_do_list, item), method: :delete,
+                data: {confirm: "Are you sure you want to delete this item?"} %>
 <% end %>
 
 <h3>Add new item</h3>
