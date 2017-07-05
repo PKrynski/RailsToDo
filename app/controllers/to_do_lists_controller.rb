@@ -3,7 +3,9 @@ class ToDoListsController < ApplicationController
   before_action :find_list, only: [:show, :edit, :update, :destroy]
 
   def index
-    @all_lists = ToDoList.all
+    if user_signed_in?
+      @all_lists = ToDoList.where(:user_id => current_user.id)
+    end
   end
 
   def show
@@ -11,11 +13,11 @@ class ToDoListsController < ApplicationController
   end
 
   def new
-    @to_do_list = ToDoList.new
+    @to_do_list = current_user.to_do_lists.build
   end
 
   def create
-    @to_do_list = ToDoList.new(to_do_list_params)
+    @to_do_list = current_user.to_do_lists.build(to_do_list_params)
     if @to_do_list.save
       redirect_to root_path
     else
