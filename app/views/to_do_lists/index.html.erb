@@ -1,8 +1,10 @@
 <% if user_signed_in? %>
     <% @all_lists.each do |to_do_list| %>
-        <h2><%= link_to to_do_list.title, to_do_list %></h2>
+        <h1><%= link_to to_do_list.title, to_do_list %></h1>
         <p><%= to_do_list.description %></p>
     <% end %>
 
-    <%= link_to "New list", new_to_do_list_path %>
+    <%= link_to "New list", new_to_do_list_path, class: "btn btn-primary" %>
+    <% else %>
+    <%= render 'layouts/welcome_page'  %>
 <% end %>

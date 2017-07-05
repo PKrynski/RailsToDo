@@ -1,4 +1,4 @@
 <%= simple_form_for [@to_do_list, @to_do_list.items.new] do |f|  %>
-    <%= f.input :content %>
+    <%= f.input :content, label:false %>
     <%= f.button :submit %>
 <% end %>

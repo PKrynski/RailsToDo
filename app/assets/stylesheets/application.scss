@@ -11,4 +11,11 @@
  * It is generally better to create a new file per style scope.
  */
 @import "bootstrap-sprockets";
+
+// Import variables
+@import "bootswatch/cosmo/variables";
+
 @import "bootstrap";
+
+// And finally bootswatch style itself
+@import "bootswatch/cosmo/bootswatch";
