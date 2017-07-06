@@ -1,0 +1,18 @@
+<div class="row">
+  <h1 style="margin-bottom: 21px"><%= @to_do_list.title %></h1>
+</div>
+
+<div class="row">
+  <ul id="share-list" class="list-group">
+
+    <% @items.each do |item| %>
+        <li class="list-group-item">
+          <p><%= item.content %></p>
+        </li>
+    <% end %>
+
+  </ul>
+</div>
+
+<input id="list-id" value="<%= @to_do_list.id %>">
+<p id="list-id-text"><%= @to_do_list.id %></p>

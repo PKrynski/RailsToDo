@@ -1,6 +1,6 @@
 class ToDoListsController < ApplicationController
 
-  before_action :find_list, only: [:show, :edit, :update, :destroy]
+  before_action :find_list, only: [:show, :edit, :update, :destroy, :share]
 
   def index
     if user_signed_in?
@@ -39,6 +39,10 @@ class ToDoListsController < ApplicationController
   def destroy
     @to_do_list.destroy
     redirect_to root_path
+  end
+
+  def share
+    @items = @to_do_list.items.all
   end
 
   private

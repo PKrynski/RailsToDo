@@ -13,4 +13,9 @@ Rails.application.routes.draw do
 
   root 'to_do_lists#index'
 
+  get '/share/:id', to: 'to_do_lists#share', as: 'share'
+
+  # Serve websocket cable requests in-process
+  mount ActionCable.server => '/cable'
+
 end
