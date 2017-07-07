@@ -15,4 +15,4 @@ App.share = App.cable.subscriptions.create "ShareChannel",
       if data.item
         $('#share-list').append('<li id="' + data.item_id + '" class="list-group-item"><p>' + data.item + '</p></li>')
       else
-        $("#" + data.item_id).hide()
+        $("#" + data.item_id).remove()
