@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   def create
     @item = @to_do_list.items.create(item_params)
     if @item.save
-      ActionCable.server.broadcast "share", item: @item.content, list_id: @to_do_list.id
+      ActionCable.server.broadcast "share", item: @item.content, item_id: @item.id, list_id: @to_do_list.id
       redirect_to to_do_list_path(@to_do_list)
     else
       render 'new'
@@ -23,6 +23,7 @@ class ItemsController < ApplicationController
   def destroy
     @item = @to_do_list.items.find(params[:id])
     @item.destroy
+    ActionCable.server.broadcast "share", item_id: @item.id, list_id: @to_do_list.id
     redirect_to to_do_list_path(@to_do_list)
   end
 
