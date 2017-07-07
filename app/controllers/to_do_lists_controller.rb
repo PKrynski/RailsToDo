@@ -1,6 +1,7 @@
 class ToDoListsController < ApplicationController
 
   before_action :find_list, only: [:show, :edit, :update, :destroy, :share]
+  before_action :check_list_owner, only: [:show, :edit, :update, :destroy]
 
   def index
     if user_signed_in?
@@ -53,6 +54,13 @@ class ToDoListsController < ApplicationController
 
   def find_list
     @to_do_list = ToDoList.find(params[:id])
+  end
+
+  def check_list_owner
+    unless current_user == @to_do_list.user
+      flash[:alert] = "You cannot view this list."
+      redirect_to root_path
+    end
   end
 
 end

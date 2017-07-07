@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :find_list
+  before_action :check_list_owner, only: [:new, :destroy]
 
   def index
     @all_items = @to_do_list.items.all
@@ -43,8 +44,11 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:content)
   end
 
-  def find_item
-    @item = Item.find(params[:id])
+  def check_list_owner
+    unless current_user == @to_do_list.user
+      flash[:alert] = "You cannot add or remove items from list."
+      redirect_to root_path
+    end
   end
 
 end
